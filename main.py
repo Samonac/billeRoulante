@@ -644,46 +644,20 @@ def sketchPlot(letter='', readFromFile='', plottingInput=False):
     # elif (letter == '' and readFromFile == '') or (letter != '' and plotting):
     #     if readFromFile == '' and not plotLetter:
 
-    img = np.zeros((windowSize[0], windowSize[1], 1), np.uint8)
-
-    drawing = False  # true if mouse is pressed
-    outOfBorder = False  # true if mouse is outside of circle
-    pt1_x, pt1_y = None, None
-    print('doing the test draw window')
-
-    cv2.namedWindow('test draw')
-
-    cv2.setMouseCallback('test draw', line_drawing)
-    draw_circle()
-    draw_grid()
-
-    cv2.imwrite('background_drawing.PNG', img)
-
-    while not readyToPlot:
-        cv2.imshow('test draw', img)
-        if cv2.waitKey(1) & 0xFF == 27:
-            readyToPlot = False
-            coordToPlot = []
-
-            break
-    # cv2.destroyAllWindows()
-
-    # startPlotting(coordToPlot, letter)
-
     # else:
     # with open(readFromFile, 'r') as fileReader:
     print('this is readFromFile : {}'.format(readFromFile))
     if readFromFile != '':
         print(' this is coordToPlot : {}'.format(coordToPlot))
         try:
-            if readFromFile.index(pathRef+'/coordToPlot/') > -1 and coordToPlot != []:
-                # inputFile = open(readFromFile, 'r')
-                with open(readFromFile, 'w') as fileWriter:
-                    json.dump(coordToPlot, fileWriter)
-                    # coordToPlot = json.load(inputFile)
-                    # coordToPlot = coordToPlot['coords']
-                    # print('Loaded coordToPlot : {}'.format(coordToPlot))
-                print('Ready to start plotting with coordToPlot : {}'.format(coordToPlot))
+            if readFromFile.index('.json') > -1 and coordToPlot == []:
+                inputFile = open(readFromFile, 'r')
+                # with open(readFromFile, 'w') as fileWriter:
+                #     json.dump(coordToPlot, fileWriter)
+                coordToPlot = json.load(inputFile)
+                coordToPlot = coordToPlot['coords']
+                print('Loaded coordToPlot : {}'.format(coordToPlot))
+                # print('Ready to start plotting with coordToPlot : {}'.format(coordToPlot))
                 startPlotting(coordToPlot=coordToPlot)
                 readFromFile = ''
                 coordToPlot = []
@@ -692,9 +666,11 @@ def sketchPlot(letter='', readFromFile='', plottingInput=False):
                 print('DONE 1')
                 return True
             else:
-                print("couldn't find the file, ready to start plotting for letter {}".format(letter))
-                startPlotting(plotLetter=letter)
-                # sketchPlot(letter='', readFromFile='', plottingInput=False)
+                if plotLetter != '':
+                    print("couldn't find the file, ready to start plotting for letter {}".format(letter))
+
+                    startPlotting(plotLetter=letter)
+                    # sketchPlot(letter='', readFromFile='', plottingInput=False)
         except Exception as e:
             print('EXCEPTION AS E : {}'.format(e))
             coordToPlot = []
@@ -730,6 +706,33 @@ def sketchPlot(letter='', readFromFile='', plottingInput=False):
             # startPlotting(coordToPlot)
             pass
     else:
+
+        img = np.zeros((windowSize[0], windowSize[1], 1), np.uint8)
+
+        drawing = False  # true if mouse is pressed
+        outOfBorder = False  # true if mouse is outside of circle
+        pt1_x, pt1_y = None, None
+        print('doing the test draw window')
+
+        cv2.namedWindow('test draw')
+
+        cv2.setMouseCallback('test draw', line_drawing)
+        draw_circle()
+        draw_grid()
+
+        cv2.imwrite('background_drawing.PNG', img)
+
+        while not readyToPlot:
+            cv2.imshow('test draw', img)
+            if cv2.waitKey(1) & 0xFF == 27:
+                readyToPlot = False
+                coordToPlot = []
+
+                break
+        # cv2.destroyAllWindows()
+
+        # startPlotting(coordToPlot, letter)
+
         startPlotting(coordToPlot=coordToPlot)
 
 
@@ -823,7 +826,8 @@ def getCoordsFromPicture(pictureFile, showContour=False):
         cv2.imshow('img', res)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-    sketchPlot(jsonName)
+    # startPlotting()
+    sketchPlot(readFromFile=jsonName)
 
 
 def writeTextOnImage(text, imgFile):
@@ -911,5 +915,8 @@ def confPlotChars():
 
 
 # sketchPlot(readFromFile='coordToPlot/coordToPlot_b.json')
-sketchPlot()
+# sketchPlot()
 # confPlotChars()
+
+# getCoordsFromPicture('PICTURES/spirale.png')
+getCoordsFromPicture('PICTURES/star.png')
