@@ -27,52 +27,64 @@ import settings
 # previousAngles = os.getenv("previousAngles")
 
 pathRef = '.'
-printLogs = False
+printLogs = True
+mustWriteArduino = False
+drawArchi = True
 readyToPlot = False
 forceAnglesToInt = True
 coordToPlot = []
 windowSize = [600, 600]
 diameter = 60
 previousAngles = []
-
+currentAlpha = 0  # -420
+currentBeta = 0  # -420
+currentGamma = 0  # -420
+pt1_x = int(windowSize[0]/2)
+pt1_y = int(windowSize[1]/2)
+# int(windowSize[0] / 2), int(windowSize[1] / 100)
+hookCoord = [int(windowSize[0] / 2), int(windowSize[1] / 100)]
 
 ports = list(port_list.comports())
 print("Available ports :")
 for p in ports:
     print(p)
 
+#port = 'COM6'
+#ard = serial.Serial(port,9600,timeout=5)
+
 d1 = float(15)
 d2 = float(15)
 currentA = 0
 currentB = 0
 
-def writeArduino(tempX, tempY):
+def writeArduino(tempX, tempY, tempZ):
+    if printLogs: print('In writeArduino with (tempX, tempY, tempZ) = ({},{},{})'.format(tempX, tempY, tempZ))
     #The following line is for serial over GPIO
-    port = 'COM3'
 
 
-    ard = serial.Serial(port,9600,timeout=5)
+    # i = 0
+    # running = True
+    # while running:
+    #   Serial write section
+    #
+    setTemp1 = "A{}:B{}:C{}".format(tempX, tempY, tempZ)
+    print("Python value sent: {}".format(setTemp1))
+    print(setTemp1)
+    setTemp1 = '0'
+    ard.write(setTemp1.encode())
+    # ard.write(setTemp1)
+    time.sleep(0.5)  # with the port open, the response will be buffered
+    #   so wait a bit longer for response here
+    time.sleep(3)
+    #   Serial read sectionx
+    msg = ard.read(ard.inWaiting())  # read everything in the input buffer
+    print("Message from arduino: ")
+    print(msg)
+    #   i+=5
+    #   i=i%185
 
-    i = 0
-    running = True
-    while running:
-        # Serial write section
-        setTemp1 = "A{}:B{}".format(tempX+i, tempY+i)
-        print("Python value sent: ")
-        print(setTemp1)
-        ard.write(setTemp1.encode())
-        time.sleep(0.5)  # with the port open, the response will be buffered
-        # so wait a bit longer for response here
-
-        # Serial read section
-        msg = ard.read(ard.inWaiting())  # read everything in the input buffer
-        print("Message from arduino: ")
-        print(msg)
-        i+=5
-        i=i%185
-
-    print ("Exiting")
-    exit()
+    # print ("Exiting")
+    # exit()
 
 def doRandomCircles():
     index = 0
@@ -260,6 +272,161 @@ def calculateAnglesNative(xAinput, yAinput):
 
     return [(alpha1, beta1), (alpha2, beta2)]
 
+def drawAngleGraphOnImg(img, alphaTemp, betaTemp, gammaTemp):
+    if printLogs: print('In drawAngleGraphOnImg with (alphaTemp, betaTemp, gammaTemp) : ({},{},{})'.format(alphaTemp, betaTemp, gammaTemp))
+
+    # cv2.line(img, (int(windowSize[0] / 2), int(windowSize[1] / 100)), (x, y), color=(100, 100, 100), thickness=1)
+    colorTemp = (100,255,255)
+    if alphaTemp < 0:
+        colorTemp = (0, 255, 255)
+        alphaTemp = -alphaTemp
+
+    cv2.circle(img,
+               # (15, int(windowSize[1]) - 15),
+               (40, 40),
+               radius=36,
+               color=(255, 255, 255),
+               thickness=1)
+
+
+    cv2.circle(img,
+               # (15, int(windowSize[1]) - 15),
+               (40, 40),
+               radius=int(alphaTemp*40/360),
+               color=colorTemp,
+               thickness=1)
+
+    # beta
+    colorTemp = (100,255,100)
+    if betaTemp < 0:
+        colorTemp = (100, 0, 100)
+        betaTemp = -betaTemp
+    cv2.circle(img,
+               # (15, int(windowSize[1]) - 15),
+               (int(windowSize[0]) - 40, 40),
+               radius=36,
+               color=(255, 255, 255),
+               thickness=1)
+
+    cv2.circle(img,
+               # (15, int(windowSize[1]) - 15),
+               (int(windowSize[0]) - 40, 40),
+               radius=int(betaTemp*40/360),
+               color=colorTemp,
+               thickness=1)
+
+    # gamma
+    colorTemp = (255,100,100)
+    if gammaTemp < 0:
+        colorTemp = (255, 0, 100)
+        gammaTemp = -gammaTemp
+    cv2.circle(img,
+               # (15, int(windowSize[1]) - 15),
+               (66, int(windowSize[1]) - 40),
+               radius=36,
+               color=(255, 255, 255),
+               thickness=1)
+    cv2.circle(img,
+               # int(windowSize[0]/2)
+               (66, int(windowSize[1]) - 40),
+               radius=int(gammaTemp*40/360),
+               color=colorTemp,
+               thickness=1)
+
+def drawArchiOnImg(img, x, y):
+    global pt1_x, pt1_y, drawing, coordToPlot, readyToPlot, outOfBorder
+
+    print(" (!) In drawArchiOnImg with (x, y) : ({}, {})".format(x, y))
+    # drawArchi
+    # line_drawing(event, x, y, flags, param)
+    cv2.circle(img,
+               (int(windowSize[0] / 2), 15),
+               radius=10,
+               color=(255, 255, 100),
+               thickness=1)
+    cv2.circle(img,
+               (15, int(windowSize[1]) - 15),
+               radius=10,
+               color=(255, 255, 100),
+               thickness=1)
+    cv2.circle(img,
+               (int(windowSize[0]) - 15, int(windowSize[1]) - 15),
+               radius=10,
+               color=(255, 255, 100),
+               thickness=1)
+
+
+    cv2.line(img, (hookCoord[0], hookCoord[1]), (x, y), color=(100, 100, 100), thickness=1)
+    # cv2.line(img, (int(windowSize[0] / 2), int(windowSize[1] / 100)), (x, y), color=(100, 100, 100), thickness=1)
+
+
+def prepareGamma(convertedCoordA1, convertedCoordA2):
+    print("in prepareGamma with (convertedCoordA1, convertedCoordA2) = ({},{})".format(convertedCoordA1, convertedCoordA2))
+
+    # samonac
+    try:
+        windCoord = convertWindowToPlot([convertedCoordA1, convertedCoordA2])
+
+        alpha1 = math.asin(windCoord[0][0]/d1)*180.0/math.pi
+        beta1 = math.asin(windCoord[0][1]/d1)*180.0/math.pi
+
+        alpha2 = math.asin(windCoord[1][0]/d1)*180.0/math.pi
+        beta2 = math.asin(windCoord[1][1]/d1)*180.0/math.pi
+    except:
+        pass
+
+    return [0, 0]
+
+def reinitServos():
+    global currentAlpha, currentBeta, currentGamma
+    print('\n\n  !! WARN !! : \n      Reinit Servos to (O, O, O) ! ')
+    writeArduino(0, 0, 0)
+    currentAlpha = 0
+    currentBeta = 0
+    currentGamma = 0
+    return [0, 0, 0]
+
+def prepareArduino(alpha1, alpha2, beta1, beta2, gamma1, gamma2):
+    global currentAlpha, currentBeta, currentGamma
+    print("in prepareArduino with (alpha1, alpha2, beta1, beta2, gamma1, gamma2) = ({},{},{},{},{},{})".format(alpha1, alpha2, beta1, beta2, gamma1, gamma2))
+    print("in prepareArduino with (currentAlpha, currentBeta, currentGamma) = ({},{},{})".format(currentAlpha, currentBeta, currentGamma))
+    if currentAlpha == -420 or currentBeta == -420 or currentGamma == -420:
+        reinitServos()
+        currentAlpha = alpha1
+        currentBeta = beta1
+        currentGamma = gamma1
+        if printLogs: print('> 1. Returning (currentAlpha, currentBeta, currentGamma) : ({},{},{})'.format(currentAlpha, currentBeta, currentGamma))
+
+        return [currentAlpha, currentBeta, currentGamma]
+
+    elif (currentAlpha == 0 or currentBeta == 0 or currentGamma == 0):
+        currentAlpha = alpha1
+        currentBeta = beta1
+        currentGamma = gamma1
+        if printLogs: print('> 2. Returning (currentAlpha, currentBeta, currentGamma) : ({},{},{})'.format(currentAlpha, currentBeta, currentGamma))
+
+        return [currentAlpha, currentBeta, currentGamma]
+
+    else:
+        if alpha1<currentAlpha*1.1 and alpha1>currentAlpha*0.9:
+            currentAlpha = alpha1
+        elif alpha2<currentAlpha*1.1 and alpha2>currentAlpha*0.9:
+            currentAlpha = alpha2
+        if beta1<currentBeta*1.1 and beta1>currentBeta*0.9:
+            currentBeta = beta1
+        elif beta2<currentBeta*1.1 and beta2>currentBeta*0.9:
+            currentBeta = beta2
+        if gamma1<currentGamma*1.1 and gamma1>currentGamma*0.9:
+            currentGamma = gamma1
+        elif gamma2<currentGamma*1.1 and gamma2>currentGamma*0.9:
+            currentGamma = gamma2
+
+        if printLogs: print('> 3. Returning (currentAlpha, currentBeta, currentGamma) : ({},{},{})'.format(currentAlpha, currentBeta, currentGamma))
+
+        return [currentAlpha, currentBeta, currentGamma]
+
+    print('0. Returning zero values (currentAlpha, currentBeta, currentGamma) : (0, 0, 0)')
+    return [0, 0, 0]
 
 def plotCircles(img2, xA, yA, distance=0):
     if printLogs: print('In plotCircles with xA, yA = ({},{})'.format(xA, yA))
@@ -294,6 +461,7 @@ def plotCircles(img2, xA, yA, distance=0):
     # convertedCoordY = convertPlotToWindow((0, endyA1))
     convertedCoordX = convertPlotToWindow((0, 0))
     convertedCoordY = convertPlotToWindow((endxA1, endyA1))
+    convertedCoordA1 = convertedCoordY
     # print('\n orange (first branch for first option) : ')
     # print('convertedCoordX = {}'.format(convertedCoordX))
     # print('convertedCoordY = {}'.format(convertedCoordY))
@@ -308,6 +476,7 @@ def plotCircles(img2, xA, yA, distance=0):
     # convertedCoordX = convertPlotToWindow((0, endxA2))
     convertedCoordX = convertPlotToWindow((0, 0))
     convertedCoordY = convertPlotToWindow((endxA2, endyA2))
+    convertedCoordA2 = convertedCoordY
     # print('\n brown (first branch for second option) : ')
     # print('convertedCoordX = {}'.format(convertedCoordX))
     # print('convertedCoordY = {}'.format(convertedCoordY))
@@ -322,6 +491,7 @@ def plotCircles(img2, xA, yA, distance=0):
     # convertedCoordY = convertPlotToWindow((endyA1, endyB1))
     convertedCoordX = convertPlotToWindow((endxA1, endyA1))
     convertedCoordY = convertPlotToWindow((endxB1, endyB1))
+    convertedCoordB1 = convertedCoordY
     # print('\n red (second branch for first option) : ')
     # print('convertedCoordX = {}'.format(convertedCoordX))
     # print('convertedCoordY = {}'.format(convertedCoordY))
@@ -339,12 +509,30 @@ def plotCircles(img2, xA, yA, distance=0):
     # convertedCoordY = convertPlotToWindow((endyA2, endyB2))
     convertedCoordX = convertPlotToWindow((endxA2, endyA2))
     convertedCoordY = convertPlotToWindow((endxB2, endyB2))
+    convertedCoordB2 = convertedCoordY
     # print('\n magenta (second branch for second option) : ')
     # print('convertedCoordX = {}'.format(convertedCoordX))
     # print('convertedCoordY = {}'.format(convertedCoordY))
     cv2.line(img3, convertedCoordX, convertedCoordY, color=(255, 0, 255), lineType=cv2.LINE_AA, thickness=3)
     if printLogs: print("plotted A2 -> B2 in magenta : ({}, {})".format(endxB2, endyB2))
 
+
+    if drawArchi:
+        if printLogs: print("Drawing archi for x, y : {}".format(convertedCoordA1))
+
+        drawArchiOnImg(img3, convertedCoordA1[0], convertedCoordA1[1])
+        drawArchiOnImg(img3, convertedCoordA2[0], convertedCoordA2[1])
+
+    [gamma1, gamma2] = prepareGamma(convertedCoordA1, convertedCoordA2)
+    [inputA, inputB, inputC] = prepareArduino(alpha1, alpha2, beta1, beta2, gamma1, gamma2)
+
+    if drawArchi:
+        if printLogs: print("Drawing drawAngleGraphOnImg for prepareArduino")
+
+        drawAngleGraphOnImg(img3, inputA, inputB, inputC)
+
+    if mustWriteArduino:
+        writeArduino(inputA, inputB, inputC)
     # potting the points
     # plt.plot(x, y)
 
@@ -362,7 +550,7 @@ def plotCircles(img2, xA, yA, distance=0):
 
 
 # print("Writing to Arduino :")
-# writeArduino(0, 0)
+# writeArduino(0, 0, 0)
 
 
 # plotCircles(-15, 15)
@@ -418,7 +606,7 @@ def convertWindowToPlot(coord):
         yA = (windowSize[1] / 2 - yA) * diameter / windowSize[1]
         yB = (windowSize[1] / 2 - yB) * diameter / windowSize[1]
 
-        if printLogs: print('adding this to coord to plot : {}'.format([[xA, yA], [xB, yB]]))
+        if printLogs: print('returning this window conversion : {}'.format([[xA, yA], [xB, yB]]))
 
         return [[xA, yA], [xB, yB]]
     except Exception as e:
@@ -525,10 +713,12 @@ def sketchPlot(letter='', readFromFile='', plottingInput=False):
 
     # mouse callback function
     def line_drawing(event, x, y, flags, param):
-        global pt1_x, pt1_y, drawing, coordToPlot, readyToPlot, outOfBorder
+        global pt1_x, pt1_y, drawing, pressed, coordToPlot, readyToPlot, outOfBorder
 
         if event == cv2.EVENT_LBUTTONDOWN:
-
+            print('PRESSED LEFT CLICK ! ')
+            drawing = True
+            pressed = True
             if (x - windowSize[0] / 2) ** 2 + (y - windowSize[0] / 2) ** 2 > (windowSize[0] / 2) ** 2:
                 if printLogs: print(' !! 1. OUT OF BORDERS !!')
                 # print(' x = {}'.format(x))
@@ -544,17 +734,20 @@ def sketchPlot(letter='', readFromFile='', plottingInput=False):
         elif event == cv2.EVENT_MOUSEMOVE:
             try:
                 if (x - windowSize[0] / 2) ** 2 + (y - windowSize[0] / 2) ** 2 > (windowSize[0] / 2) ** 2:
-                    if printLogs: print(' !! 1. OUT OF BORDERS !!')
+                    if printLogs: print(' !! 33. OUT OF BORDERS !!')
                     # print(' x = {}'.format(x))
                     # print(' y = {}'.format(y))
                     # print(' windowSize = {}'.format(windowSize))
                     outOfBorder = True
                     drawing = False
-                else:
+                elif pressed :
                     drawing = True
                     outOfBorder = False
+                # elif drawing:
+                #     outOfBorder = False
 
                 if drawing == True:
+                    print('appending line ! ')
                     cv2.line(img, (pt1_x, pt1_y), (x, y), color=(255, 255, 255), thickness=2)
                     coordToPlot.append(convertWindowToPlot([[pt1_x, pt1_y], [x, y]]))
                     # coordToPlot.append([[pt1_x, pt1_y], [x, y]])
@@ -562,12 +755,16 @@ def sketchPlot(letter='', readFromFile='', plottingInput=False):
             except:
                 pass
         elif event == cv2.EVENT_LBUTTONUP:
-            drawing = False
+            # drawing = False
+
+            pressed = False
+            print('LEFT BUTTON UP ! ')
             if (x - windowSize[0] / 2) ** 2 + (y - windowSize[0] / 2) ** 2 > (windowSize[0] / 2) ** 2:
                 if printLogs: print(' !! 2. OUT OF BORDERS !!')
                 outOfBorder = True
             else:
                 cv2.line(img, (pt1_x, pt1_y), (x, y), color=(255, 255, 255), thickness=2)
+            (pt1_x, pt1_y) = (x, y)
 
         elif event == cv2.EVENT_RBUTTONDOWN:
             drawing = False
@@ -915,8 +1112,14 @@ def confPlotChars():
 
 
 # sketchPlot(readFromFile='coordToPlot/coordToPlot_b.json')
-# sketchPlot()
+sketchPlot()
 # confPlotChars()
 
 # getCoordsFromPicture('PICTURES/spirale.png')
-getCoordsFromPicture('PICTURES/star.png')
+# getCoordsFromPicture('PICTURES/star2.png')
+# NO : getCoordsFromPicture('PICTURES/METEO.png')
+# testPNG.png
+# writeArduino(0, 0, 0)
+# writeArduino(87, 87, 0)
+# writeArduino(0, 150, 0)
+# writeArduino(87, 87, 0)

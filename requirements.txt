@@ -1,3 +1,4 @@
 python-dotenv
 serial
 opencv-python
+RPi.GPIO

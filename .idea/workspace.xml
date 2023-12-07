@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08444be8-de5d-4805-9066-fd0e0dcd577a" name="Default Changelist" comment="" />
+    <list default="true" id="08444be8-de5d-4805-9066-fd0e0dcd577a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/servoControl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,10 +28,52 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="FORTNITE" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="arduino" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/FORTNITE.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="HALAT-MineAndSolve" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="arduino" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Desktop" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Desktop/HALAT-MineAndSolve.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="findGPG" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="arduino" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -69,10 +116,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="writeArduinoTest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="arduino" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/writeArduinoTest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.FORTNITE" />
+      <item itemvalue="Python.HALAT-MineAndSolve" />
       <item itemvalue="Python.findGPG" />
+      <item itemvalue="Python.writeArduinoTest" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.HALAT-MineAndSolve" />
+        <item itemvalue="Python.FORTNITE" />
+        <item itemvalue="Python.writeArduinoTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -88,41 +166,26 @@
     </task>
     <servers />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="195" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610199403014">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2539" height="256" key="GridCell.Tab.0.bottom" timestamp="1701945692178">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="414" y="195" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1610199403014" />
-    <state x="693" y="342" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1610199506773">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2539" height="256" key="GridCell.Tab.0.bottom/2560.-480.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1701945692178" />
+    <state width="2539" height="256" key="GridCell.Tab.0.center" timestamp="1701945692177">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="693" y="342" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1610199506773" />
-    <state x="740" y="295" key="FileChooserDialogImpl" timestamp="1610198369656">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2539" height="256" key="GridCell.Tab.0.center/2560.-480.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1701945692177" />
+    <state width="2539" height="256" key="GridCell.Tab.0.left" timestamp="1701945692177">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="740" y="295" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1610198369656" />
-    <state width="1899" height="359" key="GridCell.Tab.0.bottom" timestamp="1610201679371">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2539" height="256" key="GridCell.Tab.0.left/2560.-480.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1701945692177" />
+    <state width="2539" height="256" key="GridCell.Tab.0.right" timestamp="1701945692178">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1899" height="359" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1610201679371" />
-    <state width="1899" height="359" key="GridCell.Tab.0.center" timestamp="1610201679371">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="2539" height="256" key="GridCell.Tab.0.right/2560.-480.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1701945692178" />
+    <state x="781" y="345" key="SettingsEditor" timestamp="1701439522851">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1899" height="359" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1610201679371" />
-    <state width="1899" height="359" key="GridCell.Tab.0.left" timestamp="1610201679371">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1899" height="359" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1610201679371" />
-    <state width="1899" height="359" key="GridCell.Tab.0.right" timestamp="1610201679371">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1899" height="359" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1610201679371" />
-    <state x="667" y="273" width="585" height="534" key="find.popup" timestamp="1610198750522">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="667" y="273" width="585" height="534" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1610198750522" />
+    <state x="781" y="345" key="SettingsEditor/0.0.2560.1400/2560.-480.1080.1880@0.0.2560.1400" timestamp="1701439522851" />
   </component>
 </project>
