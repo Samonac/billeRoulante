@@ -16,7 +16,7 @@ import os
 
 print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()))
 
-import settings
+# import settings
 # pathRef = os.getenv("pathRef")
 # printLogs = os.getenv("printLogs")
 # readyToPlot = os.getenv("readyToPlot")

@@ -1,0 +1,56 @@
+{
+    "Chambre - Pyramide": {
+        "light_id": 1,
+        "name": "Chambre - Pyramide",
+        "on": true,
+        "brightness": 254,
+        "colormode": null,
+        "hue": null,
+        "saturation": null,
+        "xy": null,
+        "colortemp": null,
+        "effect": null,
+        "alert": "select",
+        "transitiontime": null,
+        "reset_bri_after_on": null,
+        "reachable": false,
+        "type": "Dimmable light"
+    },
+    "Hue white spot 1": {
+        "light_id": 8,
+        "name": "Hue white spot 1",
+        "on": false,
+        "brightness": 0,
+        "colormode": null,
+        "hue": null,
+        "saturation": null,
+        "xy": null,
+        "colortemp": null,
+        "effect": null,
+        "alert": "select",
+        "transitiontime": null,
+        "reset_bri_after_on": null,
+        "reachable": false,
+        "type": "Dimmable light"
+    },
+    "Lampadaire Salle \u00e0 manger": {
+        "light_id": 4,
+        "name": "Lampadaire Salle \u00e0 manger",
+        "on": true,
+        "brightness": 254,
+        "colormode": "ct",
+        "hue": 8417,
+        "saturation": 140,
+        "xy": [
+            0.4573,
+            0.41
+        ],
+        "colortemp": 366,
+        "effect": "none",
+        "alert": "select",
+        "transitiontime": null,
+        "reset_bri_after_on": null,
+        "reachable": true,
+        "type": "Extended color light"
+    }
+}
