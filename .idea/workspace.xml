@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08444be8-de5d-4805-9066-fd0e0dcd577a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/servoControl.py" afterDir="false" />
+    <list default="true" id="08444be8-de5d-4805-9066-fd0e0dcd577a" name="Default Changelist" comment="adding glow and weather dynamics">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ambilight/cumulonimbus2000.py" beforeDir="false" afterPath="$PROJECT_DIR$/ambilight/cumulonimbus2000.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,9 +162,27 @@
       <option name="presentableId" value="Default" />
       <updated>1594645685658</updated>
     </task>
+    <task id="LOCAL-00001" summary="servoControl test">
+      <created>1701946233271</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701946233271</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="servoControl test" />
+    <MESSAGE value="adding glow and weather dynamics" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding glow and weather dynamics" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="104" y="240" width="2296" height="869" key="CommitChangelistDialog2" timestamp="1706715648955">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="104" y="240" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1706715648955" />
+    <state x="104" y="240" width="2296" height="869" key="CommitChangelistDialog2/2560.-480.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1701946232656" />
     <state width="2539" height="256" key="GridCell.Tab.0.bottom" timestamp="1701945692178">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -187,5 +203,28 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="345" key="SettingsEditor/0.0.2560.1400/2560.-480.1080.1880@0.0.2560.1400" timestamp="1701439522851" />
+    <state x="872" y="420" key="Vcs.Push.Dialog.v2" timestamp="1701946239392">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="872" y="420" key="Vcs.Push.Dialog.v2/2560.-480.1080.1880/0.0.2560.1400@0.0.2560.1400" timestamp="1701946239392" />
+    <state x="1097" y="614" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1706715583641">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1097" y="614" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1706715583641" />
+    <state x="1407" y="0" width="1169" height="1216" key="dock-window-1" timestamp="1706713227207">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1407" y="0" width="1169" height="1216" key="dock-window-1/0.0.2560.1400@0.0.2560.1400" timestamp="1706713227207" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ambilight/cumulonimbus2000.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
